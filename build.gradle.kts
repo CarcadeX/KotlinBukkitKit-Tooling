@@ -10,7 +10,7 @@ val kotlinVersion = "1.9.0"
 val kotlinBukkitAPIVersion = "1.0.0.2"
 
 group = "tech.carcadex.kotlinbukkitkit"
-version = "0.0.1"
+version = "0.0.2"
 
 repositories {
     mavenLocal()

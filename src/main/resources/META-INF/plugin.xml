@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>tech.carcadex.kotlinbukkitkit.tooling.menu</id>
-    <name>KBK-Menu-Preview Bukkit</name>
+    <id>tech.carcadex.kotlinbukkitkit.tooling</id>
+    <name>KotlinBukkitKit Tooling</name>
     <vendor>Denis Istratov</vendor>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -14,7 +14,11 @@
 
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileEditorProvider implementation="tech.carcadex.kotlinbukkitkit.tooling.menu.MenuPreviewFileEditorProvider"/>
+        <moduleBuilder
+                builderClass="tech.carcadex.kotlinbukkitkit.tooling.wizard.KBAPIModuleBuilder"
+                id="KBK_STEP"
+                order="first"/>
+
     </extensions>
 
     <actions>
