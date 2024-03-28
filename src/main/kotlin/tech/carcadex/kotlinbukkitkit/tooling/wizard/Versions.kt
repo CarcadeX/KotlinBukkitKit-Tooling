@@ -18,7 +18,7 @@ object Versions {
 
 data class KotlinBukkitAPIVersion(
     val version: String,
-    val kotlinVersion: String = "1.9.23"
+    val kotlinVersion: String = "1.9.21"
 ) {
     override fun toString(): String {
         return version
