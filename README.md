@@ -2,7 +2,8 @@
 
 [![Install Plugin](https://img.shields.io/jetbrains/plugin/v/14913)](https://red-tea.gitbook.io/kotlinbukkitkit/genref/getting-started-with-idea-plugin)
 
-The KotlinBukkitKit Tooling is plugin for IntelliJ that helps developers using [KotlinBukkitKIT](https://github.com/CarcadeX/KotlinBukkitKit) 
+The KotlinBukkitKit Tooling is plugin for IntelliJ that helps developers using [KotlinBukkitKIT](https://github.com/CarcadeX/KotlinBukkitKit)<br>
+Check also <a href="https://github.com/CarcadeX/KBK-Menu-Preview">MenuPreview plugin</a>
 
 ## Features
 
