@@ -1,22 +1,12 @@
 # KotlinBukkitAPI-Tooling
 
-[![Install Plugin](https://img.shields.io/jetbrains/plugin/v/14913)](https://plugins.jetbrains.com/plugin/14913-kotlinbukkitapi-tooling/)
+[![Install Plugin](https://img.shields.io/jetbrains/plugin/v/14913)](https://red-tea.gitbook.io/kotlinbukkitkit/genref/getting-started-with-idea-plugin)
 
-The KotlinBukkitAPI Tooling is plugin for IntelliJ that helps developers using [KotlinBukkitAPI](https://github.com/DevSrSouza/KotlinBukkitAPI) and scripts for [Bukkript](https://github.com/DevSrSouza/Bukkript).
+The KotlinBukkitKit Tooling is plugin for IntelliJ that helps developers using [KotlinBukkitKIT](https://github.com/CarcadeX/KotlinBukkitKit) 
 
 ## Features
 
-- [Menu Preview](#Menu-Preview)
-- Tooling for [Bukkript Scripts](#Bukkript-Script).
+- Generator of KotlinBukkitKIT project
 
-## Menu Preview
+![Preview] (https://red-tea.gitbook.io/~gitbook/image?url=https:%2F%2F630270463-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F1PBqxCHnbDKJwzj8IhJk%252Fuploads%252Fo2jPveKWzw47uGTxMm2Q%252Fimage.png%3Falt=media%26token=403c70a1-fa12-435d-99c2-aab79493de97&width=400&dpr=3&quality=100&sign=5ca18a6e18c88ceb0b5a355577cfb45cadea88b46003ac032ac4f52d7cfe52b0)
 
-When using KotlinBukkitAPI Menu DSL you have a good preview of how the slots are arranged in the Menu in the game.
-
-![Preview](https://i.imgur.com/9MzzAzs.gif)
-
-## [Bukkript Script](https://github.com/DevSrSouza/Bukkript/)
-
-The plugin provides out of the box Bukkript Script resolution (`.bk.kts` files).
-
-![Preview](https://i.imgur.com/exlwVUs.gif)
