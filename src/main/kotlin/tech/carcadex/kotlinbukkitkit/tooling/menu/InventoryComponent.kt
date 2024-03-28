@@ -1,8 +1,11 @@
-package br.com.devsrsouza.kotlinbukkitapi.tooling.menu
+package tech.carcadex.kotlinbukkitkit.tooling.menu
 
 import com.intellij.util.ImageLoader
 import org.jetbrains.kotlin.utils.keysToMap
+import tech.carcadex.kotlinbukkitkit.tooling.Assets
 import java.awt.*
+import java.io.File
+import javax.imageio.ImageIO
 import javax.swing.JPanel
 
 class InventoryComponent(
@@ -14,13 +17,13 @@ class InventoryComponent(
         val CHEST_LINE_DIFF = 18
         val CHEST_WIDTH = 176
 
-        private val minecraftFontResource = "/assets/fonts/Minecraftia-Regular.ttf"
-        private val spritesFolder = "/assets/sprites"
-        private val itemsSpriteFolder = "/assets/items"
-        private val items13SpriteFolder = "/assets/items-13"
+        private val minecraftFontResource = MenuPreviewFileEditorProvider.ASSETS_FOLDER.absolutePath + "/fonts/Minecraftia-Regular.ttf"
+        private val spritesFolder = MenuPreviewFileEditorProvider.ASSETS_FOLDER.absolutePath + "/sprites"
+        private val itemsSpriteFolder = MenuPreviewFileEditorProvider.ASSETS_FOLDER.absolutePath + "/items"
+        private val items13SpriteFolder = MenuPreviewFileEditorProvider.ASSETS_FOLDER.absolutePath + "/items-13"
 
         // the selected-border is 36x36 and not 32x32
-        private val selectedBorderSizeDiff = 2
+        private const val selectedBorderSizeDiff = 2
     }
 
     private val lines = when {
@@ -29,8 +32,8 @@ class InventoryComponent(
         else -> declaration.lines
     }
 
-    private val spriteImage = ImageLoader.loadFromResource(
-        "$spritesFolder/chest-${lines}.png"
+    private val spriteImage = ImageIO.read(File(
+        "$spritesFolder/chest-${lines}.png")
     )!!
     private val itemsImage = declaration.slots.filter {
         it.line in 1..declaration.lines && it.slot in 1..9
@@ -39,24 +42,24 @@ class InventoryComponent(
         val item13 = runCatching { MinecraftItem13.valueOf(it.item) }.getOrNull()
 
         if(item13 != null) {
-            ImageLoader.loadFromResource("$items13SpriteFolder/${item13.name.toLowerCase()}.png")
+            ImageIO.read(File("$items13SpriteFolder/${item13.name.lowercase()}.png"))
         } else {
             val item = runCatching { MinecraftItem.valueOf(it.item) }.getOrNull()
 
             if (item != null) {
-                ImageLoader.loadFromResource("$itemsSpriteFolder/${item.id}-0.png")
+                ImageIO.read(File("$itemsSpriteFolder/${item.id}-0.png"))
             } else {
                 null
             }
         }
     }
     private val selectionImage = if(declaration.slots.any { it.isSelected })
-        ImageLoader.loadFromResource("$spritesFolder/selected-border.png")
+        ImageIO.read(File("$spritesFolder/selected-border.png"))
     else null
 
     private val minecraftFont = Font.createFont(
         Font.TRUETYPE_FONT,
-        this::class.java.getResource(minecraftFontResource).openStream()
+        File(minecraftFontResource)
     ).deriveFont(18.5f)
 
     init {

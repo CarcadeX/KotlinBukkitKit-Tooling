@@ -1,5 +1,8 @@
-package br.com.devsrsouza.kotlinbukkitapi.tooling.menu
+package tech.carcadex.kotlinbukkitkit.tooling.menu
 
+import com.esotericsoftware.kryo.kryo5.minlog.Log
+import com.intellij.codeInsight.codeVision.ui.mouseClicked
+import com.intellij.collaboration.ui.VerticalListPanel
 import com.intellij.openapi.editor.event.CaretEvent
 import com.intellij.openapi.editor.event.CaretListener
 import com.intellij.openapi.editor.event.DocumentEvent
@@ -8,12 +11,13 @@ import com.intellij.openapi.fileEditor.*
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.UserDataHolderBase
 import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.platform.ide.progress.ModalTaskOwner.component
 import com.intellij.psi.PsiDocumentManager
-import com.intellij.psi.util.forEachDescendantOfType
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.layout.panel
 import com.intellij.util.Alarm
 import org.jetbrains.kotlin.psi.KtCallExpression
+import org.jetbrains.kotlin.psi.psiUtil.forEachDescendantOfType
 import java.awt.*
 import java.beans.PropertyChangeListener
 import javax.swing.*
@@ -39,7 +43,7 @@ class MenuPreviewFileEditor(
         )
     }
 
-    private lateinit var currentScroll: JBScrollPane
+    private var currentScroll: JBScrollPane? = null
     private var currentSelectedLine: Int? = null
 
     private val documentListener = object : DocumentListener {
@@ -48,21 +52,24 @@ class MenuPreviewFileEditor(
         }
         override fun documentChanged(event: DocumentEvent) {
             mySwingAlarm.addRequest({
-                rebuild(currentScroll.viewport.viewPosition)
+                rebuild(currentScroll?.viewport?.viewPosition)
             }, REBUILD_DELAY_MILLISECONDS)
         }
     }
 
     private val caretListener = object : CaretListener {
         override fun caretPositionChanged(event: CaretEvent) {
+
             currentSelectedLine = event.newPosition.line
             mySwingAlarm.addRequest({
-                rebuild(currentScroll.viewport.viewPosition)
+                rebuild(currentScroll?.viewport?.viewPosition)
             }, REBUILD_DELAY_MILLISECONDS)
         }
     }
 
+    var registered = false
     fun setup() {
+        if(registered) return
         rebuild(null)
 
         // listen to the source code changes to rebuild the UI
@@ -70,6 +77,7 @@ class MenuPreviewFileEditor(
 
         // listen to cursor changes to make a slot selectable
         mainEditor.editor.caretModel.addCaretListener(caretListener)
+        registered = true
     }
 
     fun rebuild(currentViewPosition: Point?) {
@@ -82,32 +90,36 @@ class MenuPreviewFileEditor(
 
         // create the scroll pane with a centralized component with the inventories
         var menuCount = 0
+
         currentScroll = JBScrollPane(
-            panel {
-                tree.forEachDescendantOfType<KtCallExpression> {
-                    val declaration =
-                        findMenuDeclaration(
-                            it,
-                            currentSelectedLine
-                        )
-                    if (declaration != null) {
-                        row {
-                            component(
-                                    InventoryComponent(
-                                            declaration
-                                    )
+                panel {
+                    tree.forEachDescendantOfType<KtCallExpression> {
+                        val declaration =
+                            findMenuDeclaration(
+                                it,
+                                currentSelectedLine,
+                                myFile
                             )
+                        if (declaration != null) {
+                            row {
+                                component(
+                                    InventoryComponent(
+                                        declaration
+                                    )
+                                )
+                            }
+                            menuCount++
                         }
-                        menuCount++
                     }
-                }
-            }.centerComponent(),
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER
+                }.centerComponent(),
+        ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER
         ).apply {
             if(currentViewPosition != null)
                 viewport.viewPosition = currentViewPosition
         }
+
+
 
         if(menuCount > 0) {
             // add the scroll pane to the UI
@@ -117,11 +129,13 @@ class MenuPreviewFileEditor(
             )
         } else {
             myUi.add(
-                JLabel("Currently this source code has no menu declaration!")
-                    .centerComponent(),
-                BorderLayout.CENTER
+                JLabel("Could not render menu preview")
             )
         }
+//        val p = Panel()
+//        p.setSize(50, 100)
+//        p.background = Color.CYAN
+//        myUi.add(p)
     }
 
 
@@ -162,10 +176,17 @@ class MenuPreviewFileEditor(
         dispose()
     }
 
+
     override fun dispose() {
-        mySwingAlarm.cancelAllRequests()
-        myDocument.removeDocumentListener(documentListener)
-        mainEditor.editor.caretModel.removeCaretListener(caretListener)
+//        mySwingAlarm.cancelAllRequests()
+//        try {
+//            if(!registered) return
+//            myDocument.removeDocumentListener(documentListener)
+//            mainEditor.editor.caretModel.removeCaretListener(caretListener)
+//        } catch (e: Throwable) {
+//            Log.warn(e.message)
+//        }
+
     }
 
     private fun JComponent.centerComponent(): JPanel {

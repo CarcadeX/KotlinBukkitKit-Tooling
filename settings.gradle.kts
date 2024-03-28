@@ -1,2 +1,2 @@
-rootProject.name = "KotlinBukkitAPI-Tooling"
+rootProject.name = "KBK-Menu-Preview Bukkit"
 
