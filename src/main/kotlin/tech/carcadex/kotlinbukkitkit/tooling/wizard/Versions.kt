@@ -1,10 +1,12 @@
 package tech.carcadex.kotlinbukkitkit.tooling.wizard
 
 object Versions {
+    val `1-0-0-4-SNAPSHOT` = KotlinBukkitAPIVersion("1.0.0.4-SNAPSHOT")
     val `1-0-0-3-SNAPSHOT` = KotlinBukkitAPIVersion("1.0.0.3-SNAPSHOT")
     val `1-0-0-3` = KotlinBukkitAPIVersion("1.0.0.3")
 
     val ALL = arrayOf(
+        `1-0-0-4-SNAPSHOT`,
         `1-0-0-3`,
         `1-0-0-3-SNAPSHOT`
     )
