@@ -1,7 +1,7 @@
 <idea-plugin>
-    <id>br.com.devsrsouza.kotlinbukkitapi.tooling</id>
-    <name>KotlinBukkitAPI Tooling</name>
-    <vendor>DevSrSouza</vendor>
+    <id>tech.carcadex.kotlinbukkitkit.tooling</id>
+    <name>KotlinBukkitKit Tooling</name>
+    <vendor>Denis Istratov</vendor>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
@@ -11,28 +11,16 @@
     <depends>com.intellij.modules.externalSystem</depends>
     <depends>com.intellij.modules.java</depends>
 
+
+
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-        <fileEditorProvider implementation="br.com.devsrsouza.kotlinbukkitapi.tooling.menu.MenuPreviewFileEditorProvider"/>
+        <moduleBuilder
+                builderClass="tech.carcadex.kotlinbukkitkit.tooling.wizard.KBAPIModuleBuilder"
+                id="KBK_STEP"
+                order="first"/>
 
-        <fileType language="kotlin" extensions="bk.kts" name="Bukkript File" fieldName="INSTANCE"
-                  implementationClass="br.com.devsrsouza.kotlinbukkitapi.tooling.bukkript.BukkriptFileType" />
-        <internalFileTemplate name="Bukkript Script" />
-        <iconProvider implementation="br.com.devsrsouza.kotlinbukkitapi.tooling.bukkript.BukkriptIconProvider" order="first"/>
-
-        <moduleBuilder builderClass="br.com.devsrsouza.kotlinbukkitapi.tooling.wizard.KBAPIModuleBuilder" />
-
-        <projectViewNodeDecorator implementation="br.com.devsrsouza.kotlinbukkitapi.tooling.bukkript.BukkriptViewNodeDecorator" />
-    </extensions>
-
-    <extensions defaultExtensionNs="org.jetbrains.kotlin">
-        <scriptDefinitionsProvider implementation="br.com.devsrsouza.kotlinbukkitapi.tooling.bukkript.BukkriptScriptDefinitionProvider" />
     </extensions>
 
     <actions>
-        <!-- Add your actions here -->
-        <action id="Bukkript.NewScript" class="br.com.devsrsouza.kotlinbukkitapi.tooling.bukkript.BukkriptCreateNewFileAction">
-            <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
-        </action>
     </actions>
 </idea-plugin>

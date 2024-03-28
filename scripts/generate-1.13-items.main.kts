@@ -18,7 +18,7 @@
 @file:DependsOn("com.github.zh79325:open-gif:1.0.4")
 
 // CODE GENERATIOn
-@file:DependsOn("com.squareup:kotlinpoet:1.6.0")
+@file:DependsOn("com.squareup:kotlinpoet:0.6.0")
 
 import com.sksamuel.scrimage.ImmutableImage
 import com.sksamuel.scrimage.ScaleMethod
@@ -45,7 +45,7 @@ data class Item(
 )
 
 var items = skrape {
-    url = "https://www.deadmap.com/idlist"
+    val url = "https://www.deadmap.com/idlist"
 
     extract {
         htmlDocument {
