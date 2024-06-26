@@ -32,7 +32,8 @@ data class KotlinBukkitAPIVersion(
 
     val repositories = listOf(
         "https://hub.spigotmc.org/nexus/content/repositories/snapshots/",
-        "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+        "https://s01.oss.sonatype.org/content/repositories/snapshots/",
+        "https://s01.oss.sonatype.org/content/repositories/releases/"
     )
 
     val dependencies = listOf(
