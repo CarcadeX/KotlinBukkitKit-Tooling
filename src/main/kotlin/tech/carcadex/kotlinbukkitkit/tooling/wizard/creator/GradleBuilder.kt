@@ -26,9 +26,11 @@ fun generateGradleBuildFileContent(
         config: KBAPIModuleConfig
 ): String = with(config) {
     val kbapiDependencies = kbAPIVersion.dependencies
-            .dependenciesAsGradle(if (config.serverVersion.minor >= 16) "library" else "implementation")
+            .dependenciesAsGradle(if (config.serverVersion.minor >= 16 && !config.kbAPIVersion.version.endsWith("SNAPSHOT")) "library" else "implementation")
     val kbapiDependenciesCompileOnly = kbAPIVersion.dependenciesCompileOnly
         .dependenciesAsGradle("compileOnly")
+    val kbapiDependenciesImplementation = kbAPIVersion.dependenciesCompileOnly
+        .dependenciesAsGradle("implementation")
     val kspModules = kbAPIVersion.kspModules.dependenciesAsGradle("ksp")
     val kspDependencies = kbAPIVersion.kspModules.dependenciesAsGradle()
 
@@ -54,6 +56,7 @@ fun generateGradleBuildFileContent(
 
     return """
         |// More about the setup here: https://red-tea.gitbook.io/kotlinbukkitkit
+        |
         |plugins {
         |    kotlin("jvm") version "${kbAPIVersion.kotlinVersion}"
         |    kotlin("plugin.serialization") version "${kbAPIVersion.kotlinVersion}"
@@ -88,6 +91,7 @@ fun generateGradleBuildFileContent(
         |    //kotlinbukkitapi
         |$kbapiDependencies
         |$kbapiDependenciesCompileOnly
+        |$kbapiDependenciesImplementation
         |
         |   //ksp
         |$kspDependencies
@@ -107,11 +111,11 @@ fun generateGradleBuildFileContent(
         |}
         |
         |tasks {
-        |    shadowJar {
-        |        dependencies {
-        |           exclude(dependency("org.jetbrains:*:*"))
-        |        }
-        |    }
+        |//    shadowJar {
+        |//        minimize {
+        |//            exclude(dependency("org.jetbrains:.*:.*"))
+        |//        }
+        |//    }
         |    runServer {
         |       minecraftVersion("${config.serverVersion.maxVersion}")
         |   }

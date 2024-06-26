@@ -18,14 +18,14 @@ val ALL_PLUGINS = listOf(
                         + listOf(v1_13, v1_14, v1_15, v1_16, v1_17, v1_18, v1_19).asPluginVersion("7.2.14-SNAPSHOT") { setOf("$worldEdit:worldedit-core:$it", "$worldEdit:worldedit-bukkit:$it") }
                         + listOf(v1_20).asPluginVersion("7.3.0-SNAPSHOT") { setOf("$worldEdit:worldedit-core:$it", "$worldEdit:worldedit-bukkit:$it") }
                 ,
-                setOf("http://maven.sk89q.com/repo/")
+                setOf("https://repo.minebench.de/")
         ),
         Plugin(
                 "WorldGuard",
                 listOf(v1_8, v1_9, v1_12).asPluginVersion("6.1") { setOf("com.sk89q:worldguard:$it") }
-                        + listOf(v1_13, v1_14, v1_15, v1_16, v1_17, v1_18, v1_19, v1_20).asPluginVersion("7.0.4-SNAPSHOT") { setOf("com.sk89q.worldguard:worldguard-core:$it", "com.sk89q.worldguard:worldguard-bukkit:$it") }
+                        + listOf(v1_13, v1_14, v1_15, v1_16, v1_17, v1_18, v1_19, v1_20).asPluginVersion("7.0.1-SNAPSHOT") { setOf("com.sk89q.worldguard:worldguard-core:$it", "com.sk89q.worldguard:worldguard-bukkit:$it") }
                 ,
-                setOf("http://maven.sk89q.com/repo/")
+                setOf("https://repo.minebench.de/")
         ),
         Plugin(
                 "Citizens",
@@ -89,6 +89,11 @@ val ALL_PLUGINS = listOf(
                 "Multiverse-Core",
                 allVersion("4.3.1") { setOf("com.onarandombox.multiversecore:Multiverse-Core:$it") },
                 setOf("https://repo.onarandombox.com/content/groups/public/")
+        ),
+        Plugin(
+                "ItemsAdder",
+                allVersion("3.6.1") { setOf("com.github.LoneDev6:api-itemsadder:$it") },
+                setOf("https://jitpack.io")
         ),
 )
 
