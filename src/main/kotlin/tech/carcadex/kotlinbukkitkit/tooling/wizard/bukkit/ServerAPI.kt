@@ -18,7 +18,8 @@ val ServerAPI.dependencies: List<String> get() {
         ServerVersion.v1_17 -> "1.17.1-R0.1-SNAPSHOT"
         ServerVersion.v1_18 -> "1.18.2-R0.1-SNAPSHOT"
         ServerVersion.v1_19 -> "1.19.4-R0.1-SNAPSHOT"
-        ServerVersion.v1_20 -> "1.20.4-R0.1-SNAPSHOT"
+        ServerVersion.v1_20 -> "1.20.6-R0.1-SNAPSHOT"
+        ServerVersion.v1_21 -> "1.21-R0.1-SNAPSHOT"
     }
 
     val dependency = when(serverType) {

@@ -4,14 +4,16 @@ object Versions {
     val `1-0-0-4-SNAPSHOT` = KotlinBukkitAPIVersion("1.0.0.4-SNAPSHOT")
     val `1-0-0-3-SNAPSHOT` = KotlinBukkitAPIVersion("1.0.0.3-SNAPSHOT")
     val `1-0-0-3` = KotlinBukkitAPIVersion("1.0.0.3")
+    val `1-0-1-0` = KotlinBukkitAPIVersion("1.0.1.0")
 
     val ALL = arrayOf(
         `1-0-0-4-SNAPSHOT`,
         `1-0-0-3`,
-        `1-0-0-3-SNAPSHOT`
+        `1-0-0-3-SNAPSHOT`,
+        `1-0-1-0`
     )
 
-    val LAST = `1-0-0-3`
+    val LAST = `1-0-1-0`
 
     val visitorAll = ALL.associate { it.version to it }
 
@@ -48,6 +50,9 @@ data class KotlinBukkitAPIVersion(
         "com.github.cryptomorin:XSeries:9.2.0"
     )
 
+    val dependenciesImplementation = listOf(
+        "org.jetbrains.kotlin:kotlin-reflect:1.9.21",
+    )
     val dependenciesCompileOnly = listOf(
         "org.jetbrains:annotations:24.0.0",
     )

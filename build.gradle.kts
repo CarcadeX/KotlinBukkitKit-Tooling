@@ -10,7 +10,7 @@ val kotlinVersion = "1.9.0"
 val kotlinBukkitAPIVersion = "1.0.0.2"
 
 group = "tech.carcadex.kotlinbukkitkit"
-version = "0.0.2"
+version = "0.0.3"
 
 repositories {
     mavenLocal()
@@ -86,11 +86,8 @@ tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml
         <br />
         <br />
 
-        <h3>Demonstration</h3>
 
         <br />
-
-        <img src="https://i.imgur.com/exlwVUs.gif" width='680' height='390'/>
     """.trimIndent())
 
 
