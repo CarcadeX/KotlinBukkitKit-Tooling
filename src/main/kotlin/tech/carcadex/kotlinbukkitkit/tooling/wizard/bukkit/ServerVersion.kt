@@ -12,7 +12,7 @@ enum class ServerVersion(val displayName: String, val maxVersion: String, val mi
     v1_18("1.18", "1.18.2", 18),
     v1_19("1.19", "1.19.4", 19),
     v1_20("1.20", "1.20.6", 20),
-    v1_21("1.21", "1.21", 20),;
+    v1_21("1.21", "1.21", 21),;
 
 
     override fun toString(): String {
